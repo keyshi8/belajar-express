@@ -1,59 +1,56 @@
-const express = require("express"); //impor modul express
-const app = express() // inisialisasi express
-const port = 3000 // port
+const express = require ("express") //impor modul express
+const app = express()//inisialisasi express
+const port = 3000 //port
 
-// route //
-app.get("/", (req, res) => {
-    res.send("hello");
+//route /
+app.get("/",(req,res)=>{
+    ///res.send("Hello");
+    res.sendFile(__dirname + "/home.html");
 });
 
-// route // about
-app.get("/about", (req, res) => {
-    res.send("about us");
+//route /about
+app.get("/about", (req,res)=>{
+    // res.send("About us");
+    res.sendFile(__dirname + "/About.html");
 });
-
-// route // contact
-app.get("/contact", (req, res) => {
+    
+//route /contact
+app.get("/contact", (req,res)=>{
+    ///res.send("contact us");
     res.sendFile(__dirname + "/contact.html");
 });
 
-// route // mahasiswa
-app.get("/mahasiswa", (req, res) => {
+//route /mahasiswa
+app.get("/mahasiswa", (req,res)=>{      
     res.json({
-        "status"    : "succes",
-        "message"   : "data mahasiswa",
-        "data"      : [
-                    {npm : 2226240076, nama : "riki"}, 
-                    {npm : 2226240077, nama : "hades"},
-                    {npm : 2226240078, nama : "andrielle"},
-                    {npm : 2226240079, nama : "faith"}
-                ]
-
+        "status" : "succes",
+        "message" : "Data Mahasiswa",
+        "data" : [{"npm": 2226240020, "nama": "Bryan"
+        },{
+            "npm" : 2226240010,
+            "nama" : "Niko"
+        }]
     })
 });
 
-// route // dosen
-app.get("/dosen", (req, res) => {
+//route /dosen
+app.get("/dosen", (req,res)=>{      
     res.json({
-        "status"    : "succes",
-        "message"   : "data dosen",
-        "data"      : [
-                    {   prodi : "sistem informasi", 
-                        nama  : ["iis", "faris", "dafid"]},
-                    
-                    {   prodi : "informatika", 
-                        nama  : ["derry", "siska", "yohanes"]}
-                ]
+        "status" : "succes",
+        "message" : "Data Dosen",
+        "data" : [
+            {"Sistem Informasi" : ["Iis" , "Faris", "Dafid"]},
+            {"Informatika" : ["Derry" , "Siska", "Yohannes"]}
+    ]
     })
-
 });
 
-// handle route yang tidak terdaftar
-app.use("", (req, res) => {
-    res.send("<h1> 404 not found </h1>");
+//handel route yang tidak terdaftar
+app.use("/",(req,res)=>{
+    res.send("<h1>404 Not Found</h1>");
 });
 
-// jalankan server //
+//jalankan server
 app.listen(port, () => {
-    console.log(`server dapat diakses di http://localhost:${port}`);
-});
+    console.log(`Server dapat diakses di http://localhost:${port}`);
+})
