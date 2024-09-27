@@ -2,22 +2,76 @@ const express = require ("express") //impor modul express
 const app = express()//inisialisasi express
 const port = 3000 //port
 
+app.set('view engine', 'ejs');
+
 //route /
 app.get("/",(req,res)=>{
     ///res.send("Hello");
-    res.sendFile(__dirname + "/home.html");
+    // res.sendFile(__dirname + "/home.html");
+
+    const berita = [
+        {
+            judul : 'berita 1',
+            isi : ' isi berita 1'
+        },
+        {
+            judul : 'berita 2',
+            isi : ' isi berita 2'
+        },
+    ];
+    res.render('index', {title: 'Halaman Home', berita});
 });
 
 //route /about
 app.get("/about", (req,res)=>{
     // res.send("About us");
-    res.sendFile(__dirname + "/About.html");
+    // res.sendFile(__dirname + "/About.html");
+    res.render('about', {title: 'Halaman About'});
 });
     
 //route /contact
 app.get("/contact", (req,res)=>{
     ///res.send("contact us");
-    res.sendFile(__dirname + "/contact.html");
+    // res.sendFile(__dirname + "/contact.html");
+    res.render('contact', {title: 'Halaman Contact'});
+});
+
+// route prodi
+app.get("/prodi", (req, res)=>{
+    const prodi = [
+        {
+           prodi : ' sistem informasi',
+           fakultas : ' FIKR',
+           singkatan : 'SI'
+        },
+        {
+            prodi : 'informatika',
+           fakultas : ' FIKR',
+           singkatan : 'IF'
+        },
+        {
+            prodi : 'teknik elektro',
+           fakultas : ' FIKR',
+           singkatan : 'TE'
+        },
+        {
+            prodi : 'manajemen informatika',
+           fakultas : ' FIKR',
+           singkatan : 'MI'
+        },
+        {
+            prodi : ' manajemen',
+           fakultas : ' FEB',
+           singkatan : 'MJ'
+        },
+        {
+            prodi : 'akutansi',
+           fakultas : ' FEB',
+           singkatan : 'AK'
+        },
+    ];
+
+    res.render('prodi', {title: 'Halaman Prodi', prodi});
 });
 
 //route /mahasiswa
