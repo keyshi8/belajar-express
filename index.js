@@ -1,10 +1,15 @@
 const express = require ("express") //impor modul express
 const app = express()//inisialisasi express
+const expressLayout = require("express-ejs-layouts"); //import modul express-ejs-layouts
 const port = 3000 //port
 
+app.set("views", __dirname + "/views");
 app.set('view engine', 'ejs');
 
-//route /
+app.use(expressLayout);
+app.use(express.static('public'));
+
+// route //
 app.get("/",(req,res)=>{
     ///res.send("Hello");
     // res.sendFile(__dirname + "/home.html");
@@ -19,21 +24,21 @@ app.get("/",(req,res)=>{
             isi : ' isi berita 2'
         },
     ];
-    res.render('index', {title: 'Halaman Home', berita});
+    res.render('index', {title: 'Halaman Home', berita, layout: 'main'});
 });
 
 //route /about
 app.get("/about", (req,res)=>{
     // res.send("About us");
     // res.sendFile(__dirname + "/About.html");
-    res.render('about', {title: 'Halaman About'});
+    res.render('about', {title: 'About us', layout: 'main'});
 });
     
 //route /contact
 app.get("/contact", (req,res)=>{
     ///res.send("contact us");
     // res.sendFile(__dirname + "/contact.html");
-    res.render('contact', {title: 'Halaman Contact'});
+    res.render('contact', {title: 'Halaman Contact', layout: 'main'});
 });
 
 // route prodi
@@ -71,7 +76,7 @@ app.get("/prodi", (req, res)=>{
         },
     ];
 
-    res.render('prodi', {title: 'Halaman Prodi', prodi});
+    res.render('prodi', {title: 'Halaman Prodi', prodi, layout: 'main'});
 });
 
 //route /mahasiswa
